@@ -12,6 +12,7 @@ import javax.swing.JTextField;
 import javax.swing.JLabel;
 
 public class LoginPage implements ActionListener {
+    // Initializes the GUI elements to be used
     private DataInputStream br;
     private DataOutputStream dos;
     private Socket socket;
@@ -27,6 +28,7 @@ public class LoginPage implements ActionListener {
         this.dos = dos;
         this.socket = socket;
         
+        // This block of code cotains the GUI dimensions and formatting for the elements
         JPanel panel = new JPanel();
         frame = new JFrame();
         frame.setSize(350, 200);
@@ -70,12 +72,13 @@ public class LoginPage implements ActionListener {
 
     }
 
+    // This is the button on-click listener logic
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
     
         JButton actionSource = (JButton) actionEvent.getSource();
 
-        // sign up and login common logic: check if empty and send username and password to server
+        // Sign up and login common logic: check if either username or password is an empty field
         if(actionSource == signUpButton || actionSource == loginButton){
             String username = usernameText.getText();
             String password = passwordText.getText();
@@ -87,7 +90,7 @@ public class LoginPage implements ActionListener {
                 return;
             }
 
-            // send the action request first and then send the username/password
+            // Send the action request first and then send the username/password
             try {
                 if(actionSource == signUpButton){
                     System.out.println("Sign up clicked");
@@ -100,18 +103,20 @@ public class LoginPage implements ActionListener {
                         dos.writeUTF("loginRequest");
                         dos.flush();
                 }
-                // send username and password to server
+                // Send username and password to server
                 dos.writeUTF(username);
                 dos.flush();
                 dos.writeUTF(password);
                 dos.flush();
-                // message gets sent back after login or signup
+                // Message gets sent back after login or signup
                 String reply = br.readUTF();
                 message.setText(reply);
+
+                // If the login was successful, then dispose of this GUI frame and open the PriceLookUpPage GUI
                 if (reply.equals("Login successful")){
                     try {
                         frame.dispose();
-                        PriceLookupPage priceLookupPage = new PriceLookupPage(br, dos, socket);
+                        new PriceLookupPage(br, dos, socket);
                     } catch (Exception e) {
                         System.out.println("Error opening new GUI");
                     }

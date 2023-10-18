@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 
 
 public class PriceLookupPage implements ActionListener{
+    // Initializes GUI elements to be used later
     private DataInputStream br;
     private DataOutputStream dos;
     private Socket socket;
@@ -31,6 +32,7 @@ public class PriceLookupPage implements ActionListener{
         this.dos = dos;
         this.socket = socket;
 
+        // This block of code contains the dimensions and logic for presenting the GUI elements and components
         JPanel panel = new JPanel();
         JFrame frame = new JFrame();
         frame.setSize(400, 200);
@@ -76,6 +78,7 @@ public class PriceLookupPage implements ActionListener{
         frame.setVisible(true);
     }
 
+    // On-click listener for the two buttons to get stock and crypto prices
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
         JButton actionSource = (JButton) actionEvent.getSource();
@@ -84,40 +87,45 @@ public class PriceLookupPage implements ActionListener{
         String crypto = cryptoTickerText.getText();
 
         try {
-        if (actionSource == getStockPrice){
-            if (stock.isEmpty()){
-                message.setText("Please enter a stock ticker");
-                return;
+            
+            // If the getStockPrice button was clicked, then send in the request as a UTF message
+            // which will be handled by the server
+            if (actionSource == getStockPrice){
+                if (stock.isEmpty()){
+                    message.setText("Please enter a stock ticker");
+                    return;
+                }
+
+                dos.writeUTF("stockPriceRequest");
+                dos.flush();
+                dos.writeUTF(stock);
+                dos.flush();
+                String reply = br.readUTF();
+                if (!reply.equals("Unable to find.")){
+                    message.setText("The price of stock " + stock + " is: " + reply + " USD.");
+                } else {
+                    message.setText(reply);
+                }
             }
 
-            dos.writeUTF("stockPriceRequest");
-            dos.flush();
-            dos.writeUTF(stock);
-            dos.flush();
-            String reply = br.readUTF();
-            if (!reply.equals("Unable to find.")){
-                message.setText("The price of stock " + stock + " is: " + reply + " USD.");
-            } else {
-                message.setText(reply);
-            }
-        }
+            // If the getCryptoPrice button was clicked, then send in the request as a UTF message
+            // which will be handled by the server
+            if (actionSource == getCryptoPrice){
+                if(crypto.isEmpty()){
+                    message.setText("Please enter a crypto ticker");
+                    return;
+                }
 
-        if (actionSource == getCryptoPrice){
-            if(crypto.isEmpty()){
-                message.setText("Please enter a crypto ticker");
-                return;
-            }
-
-            dos.writeUTF("cryptoPriceRequest");
-            dos.flush();
-            dos.writeUTF(crypto);
-            dos.flush();
-            String reply = br.readUTF();
-            if (!reply.equals("Unable to find.")){
-                message.setText("The price of crypto " + crypto + " is: " + reply + " USD.");
-            } else {
-                message.setText(reply);
-            }
+                dos.writeUTF("cryptoPriceRequest");
+                dos.flush();
+                dos.writeUTF(crypto);
+                dos.flush();
+                String reply = br.readUTF();
+                if (!reply.equals("Unable to find.")){
+                    message.setText("The price of crypto " + crypto + " is: " + reply + " USD.");
+                } else {
+                    message.setText(reply);
+                }
 
         }
         } catch (Exception e) {

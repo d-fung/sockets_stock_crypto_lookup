@@ -9,16 +9,16 @@ public class Client {
 
 
     public static void main(String argv[]) throws Exception{
+        
+        // Connects to the server socket
         Socket socket;
-
         int port = 3500;
-
-
         socket = new Socket("localhost", port);
         br = new DataInputStream(socket.getInputStream());
         dos = new DataOutputStream(socket.getOutputStream());
 
-        LoginPage login = new LoginPage(br, dos, socket);
+        // Opens the login GUI while passing in the br, dos, and socket information
+        new LoginPage(br, dos, socket);
     }
 
 
