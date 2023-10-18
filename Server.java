@@ -15,7 +15,7 @@ public class Server {
     DataInputStream br;
     DataOutputStream dos;
     int port = 3500;
-    static String APIKEY = "073a5075d6msh2b2dee3179e3355p13c041jsn2adaa10767ce";
+    static String APIKEY = "";
 
     private Map<String, String> userCredentials;
 
