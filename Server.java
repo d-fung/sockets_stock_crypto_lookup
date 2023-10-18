@@ -15,6 +15,7 @@ public class Server {
     DataInputStream br;
     DataOutputStream dos;
     int port = 3500;
+    static String APIKEY = "073a5075d6msh2b2dee3179e3355p13c041jsn2adaa10767ce";
 
     private Map<String, String> userCredentials;
 
@@ -63,7 +64,7 @@ public class Server {
     public static String getStockPrice(String ticker){
         HttpRequest request = HttpRequest.newBuilder()
 		.uri(URI.create("https://twelve-data1.p.rapidapi.com/price?symbol=" + ticker + "&format=json&outputsize=30"))
-		.header("X-RapidAPI-Key", "8c10888507mshd2946d158701951p133944jsnab1ea55d7159")
+		.header("X-RapidAPI-Key", APIKEY)
 		.header("X-RapidAPI-Host", "twelve-data1.p.rapidapi.com")
 		.method("GET", HttpRequest.BodyPublishers.noBody())
 		.build();
@@ -81,7 +82,7 @@ public class Server {
     public static String getCryptoPrice(String ticker){
         HttpRequest request = HttpRequest.newBuilder()
 		.uri(URI.create("https://twelve-data1.p.rapidapi.com/price?symbol=" + ticker + "%2FUSD&format=json&outputsize=30"))
-		.header("X-RapidAPI-Key", "8c10888507mshd2946d158701951p133944jsnab1ea55d7159")
+		.header("X-RapidAPI-Key", APIKEY)
 		.header("X-RapidAPI-Host", "twelve-data1.p.rapidapi.com")
 		.method("GET", HttpRequest.BodyPublishers.noBody())
 		.build();

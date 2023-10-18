@@ -70,7 +70,7 @@ public class PriceLookupPage implements ActionListener{
         panel.add(getCryptoPrice);
 
         message = new JLabel("");
-        message.setBounds(10, 130, 250, 25);
+        message.setBounds(10, 130, 280, 25);
         panel.add(message);
 
         frame.setVisible(true);
