@@ -21,22 +21,30 @@ public class Server {
 
 
     public static void main(String argv[]) throws Exception {
-        new Server();
+        new Server("production");
     }
 
-    public Server() throws Exception{
+    public Server(String environmentType) throws Exception{
         userCredentials = new HashMap<>();
-        serverSocket = new ServerSocket(port);
-        System.out.println("Server listening on port: " + port);
 
-        while (true) {
+        // unit tests were hanging due to creating a new socket for each test case too fast
+        // unit tests were also hanging due to the while loop waiting for clients
+        // solution is separate this block of code from production and deployment
+        if (environmentType.equals("production")){        
+            serverSocket = new ServerSocket(port);
+            System.out.println("Server listening on port: " + port);
+            while (true) {
 
-            Socket client = serverSocket.accept();
-            InetAddress clientAddress = client.getInetAddress();
-            int clientPort = client.getPort();
-            System.out.println("Accepted connection from: " + clientAddress.getHostAddress() + ":" + clientPort);
-            new MyThread(client).start();
+                Socket client = serverSocket.accept();
+                InetAddress clientAddress = client.getInetAddress();
+                int clientPort = client.getPort();
+                System.out.println("Accepted connection from: " + clientAddress.getHostAddress() + ":" + clientPort);
+                new MyThread(client).start();
 
+            }
+            
+        } else if (environmentType.equals("testing")){
+            System.out.println("Currently in test mode");
         }
 
     }
