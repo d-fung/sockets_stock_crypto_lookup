@@ -2,9 +2,6 @@
     "java.project.referencedLibraries": {
         "include": [
             "lib/**/*.jar"
-        ],
-        "exclude": [
-            "c:\\Users\\David\\Downloads\\json-20231013.jar"
         ]
     }
 }
