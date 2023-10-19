@@ -1,3 +1,7 @@
+// David Fung 100767734
+// October 19, 2023
+// SOFE 4790U Assignment 1
+
 import java.io.*;
 import java.net.*;
 import java.net.http.HttpClient;

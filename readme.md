@@ -11,8 +11,8 @@ This project application was created to provide a graphical user interface for u
 ## Instructions to Run Application
 1. Open the folder in command line
 2. Run the Server using this command
-- if on Windows: `java -cp ".;lib\* Server`
-- if on Unix: `java -cp ".:lib/* Server`
+- if on Windows: `java -cp ".;lib\*" Server`
+- if on Unix: `java -cp ".:lib/*" Server`
 3. Run the Client using this command `java Client`
 4. Enter in username and password into the GUI and click "Sign up"
 5. Using the same username and password, click "Log in"

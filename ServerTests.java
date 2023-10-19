@@ -1,5 +1,6 @@
-//import static org.junit.Assert.assertFalse;
-//import static org.junit.Assert.assertTrue;
+// David Fung 100767734
+// October 19, 2023
+// SOFE 4790U Assignment 1
 
 import static org.junit.Assert.*;
 import org.junit.Before;
@@ -8,7 +9,6 @@ import org.junit.Test;
 
 public class ServerTests {
     
-
     private Server server;
 
     // Create a new server before running the unit tests

@@ -1,3 +1,7 @@
+// David Fung 100767734
+// October 19, 2023
+// SOFE 4790U Assignment 1
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.DataInputStream;

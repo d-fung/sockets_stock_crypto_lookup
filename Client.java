@@ -1,3 +1,7 @@
+// David Fung 100767734
+// October 19, 2023
+// SOFE 4790U Assignment 1
+
 import java.io.*;
 import java.net.*;
 
@@ -6,7 +10,6 @@ public class Client {
     private static DataInputStream br;
     private static DataOutputStream dos;
     private static Socket socket;
-
 
     public static void main(String argv[]) throws Exception{
         
